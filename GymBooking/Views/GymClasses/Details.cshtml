@@ -39,17 +39,22 @@
 
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Book", "BookingToggle", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
-<br />
-<hr />
-<div>
-    <dt>
-        @Html.DisplayNameFor(model => model.AttendingMembers)
-    </dt>
-    @foreach (var member in Model.AttendingMembers) {
-        <dd>
-            @member.Email
-        </dd>
-    }
-</div>
+@if (User.Identity.IsAuthenticated) {
+    <br />
+    <hr />
+    <div>
+        <dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.AttendingMembers)
+            </dt>
+            @foreach (var member in Model.AttendingMembers) {
+                <dd>
+                    @member.Email
+                </dd>
+            }
+        </dl>
+    </div>
+}
