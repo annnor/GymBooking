@@ -10,7 +10,7 @@ using GymBooking.Models;
 
 namespace GymBooking.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class GymClassesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -119,6 +119,8 @@ namespace GymBooking.Controllers
         }
 
         // GET: GymClasses
+        [OverrideAuthorization]
+        [Authorize]
         public ActionResult BookingToggle(int id) {
 
             GymClass gymClass = db.GymClasses.Where(gym => gym.Id == id).FirstOrDefault();
@@ -132,10 +134,6 @@ namespace GymBooking.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-
-
-
 
         protected override void Dispose(bool disposing)
         {

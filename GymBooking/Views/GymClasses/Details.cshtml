@@ -35,13 +35,19 @@
         </dd>
     </dl>
 </div>
+@if (User.IsInRole("Admin")) {
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Book", "BookingToggle", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+} else {
+    <p>
+        @Html.ActionLink("Book", "BookingToggle", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
 
-
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Book", "BookingToggle", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
 @if (User.Identity.IsAuthenticated) {
     <br />
     <hr />
