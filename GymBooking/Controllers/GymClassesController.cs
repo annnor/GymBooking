@@ -10,11 +10,13 @@ using GymBooking.Models;
 
 namespace GymBooking.Controllers
 {
+    //[Authorize]
     public class GymClassesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: GymClasses
+        //[AllowAnonymous]
         public ActionResult Index()
         {
             return View(db.GymClasses.ToList());
@@ -114,6 +116,25 @@ namespace GymBooking.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        // GET: GymClasses
+        public ActionResult BookingToggle(int id) {
+
+            GymClass gymClass = db.GymClasses.Where(gym => gym.Id == id).FirstOrDefault();
+            ApplicationUser currentUser = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+
+            if (gymClass.AttendingMembers.Contains(currentUser)) {
+                gymClass.AttendingMembers.Remove(currentUser);
+            } else {
+                gymClass.AttendingMembers.Add(currentUser);
+            }
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+
+
+
 
         protected override void Dispose(bool disposing)
         {
