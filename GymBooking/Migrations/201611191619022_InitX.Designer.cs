@@ -7,13 +7,13 @@ namespace GymBooking.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Init : IMigrationMetadata
+    public sealed partial class InitX : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Init));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitX));
         
         string IMigrationMetadata.Id
         {
-            get { return "201611180935360_Init"; }
+            get { return "201611191619022_InitX"; }
         }
         
         string IMigrationMetadata.Source
